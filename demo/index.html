@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge，chrome=1">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@canary"></script>
+  <style>
+    * {
+      padding: 0;
+      margin: 0
+    }
+
+    p {
+      margin-top: 100px;
+      text-align: center
+    }
+  </style>
+</head>
+
+<body style="height: 200vh"><video controls width="100%" id='video'
+    poster="https://static.veer.com/veer/static/resources/keyword/2019-12-30/bf9ddc05c43f411688ee0316d0d931a0.jpg"
+    webkit-playsinline playsinline x5-playsinline x-webkit-airplay="allow" x5-video-player-type="h5"
+    style="display: block;margin:0 auto 0.16rem;"></video>
+  <p id="t">当前进度(秒):0</p>
+</body>
+<script>
+var video = document.getElementById('video'); 
+var videoSrc = 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8'; 
+videoSrc = 'https://v2.xw0371.com/20180404/wiyCDyE3/index.m3u8'; 
+if (Hls.isSupported()) { 
+  var hls = new Hls(); 
+  hls.loadSource(videoSrc); 
+  hls.attachMedia(video); 
+  hls.on(Hls.Events.MANIFEST_PARSED, function () { video.play() }) } 
+  else if (video.canPlayType('application/vnd.apple.mpegurl')) { 
+    video.src = videoSrc; 
+    video.addEventListener('loadedmetadata', function () { 
+    video.play() }) 
+  } 
+    video.addEventListener('timeupdate', function (e) { 
+      console.log('timeupdate'); 
+      var currentTime = video.currentTime.toFixed(1); 
+      let t = document.getElementById("t"); 
+      t.innerHTML = `当前进度(秒)：${currentTime}` })</script>
+
+</html>;
